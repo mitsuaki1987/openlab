@@ -104,12 +104,12 @@ $(function() {
 
     <h2>コメントする</h2>
 
-    <input type="button" value="Submit" id="canvassubmit">
+    <input type="button" value="投稿する" id="canvassubmit">
     <form id="submittype">
-      <input type="radio" name="subtype" value="text" checked="checked">Text
-      <input type="radio" name="subtype" value="image">Image
-      <input type="radio" name="subtype" value="file">File
-      <input type="radio" name="subtype" value="freehand">Freehand
+      <input type="radio" name="subtype" value="text" checked="checked">文章
+      <input type="radio" name="subtype" value="image">画像貼り付け
+      <input type="radio" name="subtype" value="file">ファイル貼り付け
+      <input type="radio" name="subtype" value="freehand">フリーハンド
     </form>
     <form enctype="multipart/form-data" id="submitting" action="" method="post">
       名前(ニックネームなど): <input type="text" name="name" id="submitname" value="">
@@ -126,18 +126,18 @@ $(function() {
       <br>
     </form>
     フリーハンドお絵描き(タッチパネルなど):
-    <input type="button" value="Clear" onclick="clearCanvas();">
+    <input type="button" value="キャンバスのクリア" onclick="clearCanvas();">
     <br>
     キャンバスの幅: <input type="text" id="width" value="600">
     高さ: <input type="text" id="height" value="600">
-    <input type="button" value="resize" onclick="resizeCanvas();">
+    <input type="button" value="キャンバスサイズ変更" onclick="resizeCanvas();">
     <br>
     <form id="linecolor">
-      <input type="radio" name="color" value="black" checked="checked">Black
-      <input type="radio" name="color" value="white">White
-      <input type="radio" name="color" value="red">Red
-      <input type="radio" name="color" value="green">Green
-      <input type="radio" name="color" value="blue">Blue
+      <input type="radio" name="color" value="black" checked="checked">黒
+      <input type="radio" name="color" value="white">白
+      <input type="radio" name="color" value="red">赤
+      <input type="radio" name="color" value="green">緑
+      <input type="radio" name="color" value="blue">青
     </form>
     <canvas id="canvas" width="600" height="600" style="border:solid black 1px;"></canvas>
     <pre id="log" style="border: 1px solid #ccc;"></pre>
