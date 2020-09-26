@@ -25,8 +25,7 @@ Info = {
 	addSelectionOptions: false,
 	serverURL: "https://chemapps.stolaf.edu/jmol/jsmol/php/jsmol.php",
 	use: "HTML5",
-	readyFunction: null,
-	script: "load http://www.crystallography.net/cod/1000041.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \"%e\"; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black"
+	readyFunction: null
 }
 
 $("#mydiv").html(Jmol.getAppletHtml("jmolApplet0",Info))
@@ -45,7 +44,28 @@ $("#btns").html(
 </script>
 </head>
 <body>
-<span id=mydiv></span>
-<span id=btns></span>
+	<span id=mydiv></span>
+	<span id=btns></span>
+	<br />
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/1502689.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">アルミニウム</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/2101052.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">ルビーやサファイア</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/1532664.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">高温超伝導体</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/1010060.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">ドライアイス</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/9008564.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">ダイヤモンド</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/9006598.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">鉄</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/9008868.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">青色発光ダイオード</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/1200018.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">黒鉛</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/1011023.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">氷</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/4505482.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">リチウムイオン電池正極</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/1521011.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">下部マントル</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/1000041.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">しお(岩塩)</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/1008718.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">ネオジム磁石</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/9012600.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">水晶</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/3500015.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">砂糖(スクロース)</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/9011048.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">重曹</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/2100992.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">チョーク(炭酸カルシウム)</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/9008463.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">金</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/9008459.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">銀</a>
+	<a href="javascript:Jmol.script(jmolApplet0, 'load http://www.crystallography.net/cod/9008468.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \'%e\'; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black')">銅</a>
 </body>
 </html>
