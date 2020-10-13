@@ -54,6 +54,7 @@
     <None Include="http\index.html" />
     <None Include="http\setsumei.html" />
     <None Include="http\view.html" />
+    <None Include="http\fermi\index.html" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
