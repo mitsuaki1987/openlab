@@ -1,0 +1,518 @@
+﻿<html>
+<head>
+    <title>物性研の計算機でシミュレーション</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]] } });
+    </script>
+    <script type="text/javascript"
+            src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+    <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
+
+    <meta charset="utf-8">
+    <script type="text/javascript" src="../JSmol.min.js"></script>
+    <script type="text/javascript">
+
+        // supersimple2.htm - illustrating the use of jQuery(document).ready to
+        // populate all spans and divs AFTER the page is loaded.
+        // This is good programming practice.
+
+        $(document).ready(
+
+            function () {
+
+                Info = {
+                    width: 600,
+                    height: 600,
+                    debug: false,
+                    j2sPath: "../j2s",
+                    color: "0xC0C0C0",
+                    disableJ2SLoadMonitor: true,
+                    disableInitialConsole: true,
+                    addSelectionOptions: false,
+                    serverURL: "https://chemapps.stolaf.edu/jmol/jsmol/php/jsmol.php",
+                    use: "HTML5",
+                    readyFunction: null
+                }
+
+                $("#mydiv").html(Jmol.getAppletHtml("jmolApplet0", Info))
+                $("#btns").html(
+                    Jmol.jmolButton(jmolApplet0, "write frames {*} \"crystal.jpg\"", "画像を保存")
+                    + Jmol.jmolButton(jmolApplet0, "stereo on", "立体視オン")
+                    + Jmol.jmolButton(jmolApplet0, "stereo off", "立体視オフ")
+                )
+            }
+
+
+        );
+
+
+
+    </script>
+</head>
+<body bgcolor="CCFFCC">
+
+    <h1>物性研の計算機でシミュレーションする</h1>
+
+    格子の種類:
+    <form id="lattice">
+        <input type="radio" name="lattice" value="nacl" checked="checked">岩塩構造
+        <input type="radio" name="lattice" value="cscl">塩化セシウム構造
+        <input type="radio" name="lattice" value="znblende">閃亜鉛構造
+    </form>
+    格子の大きさ(格子乗数, 単位Å): <input type="number" name="alat" id="alat" step="0.1" min="3" max="5">
+    <br>
+    1個目の元素:
+    <form id="atom1">
+        <table border="1">
+            <tr align="left">
+                <td><input type="radio" name="atom1" value="1" checked="checked">H</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><input type="radio" name="atom1" value="2">He</td>
+            </tr>
+            <tr align="left">
+                <td><input type="radio" name="atom1" value="3">Li</td>
+                <td><input type="radio" name="atom1" value="4">Be</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><input type="radio" name="atom1" value="5">B</td>
+                <td><input type="radio" name="atom1" value="6">C</td>
+                <td><input type="radio" name="atom1" value="7">N</td>
+                <td><input type="radio" name="atom1" value="8">O</td>
+                <td><input type="radio" name="atom1" value="9">F</td>
+                <td><input type="radio" name="atom1" value="10">Ne</td>
+            </tr>
+            <tr align="left">
+                <td><input type="radio" name="atom1" value="11">Na</td>
+                <td><input type="radio" name="atom1" value="12">Mg</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><input type="radio" name="atom1" value="13">Al</td>
+                <td><input type="radio" name="atom1" value="14">Si</td>
+                <td><input type="radio" name="atom1" value="15">P</td>
+                <td><input type="radio" name="atom1" value="16">S</td>
+                <td><input type="radio" name="atom1" value="17">Cl</td>
+                <td><input type="radio" name="atom1" value="18">Ar</td>
+            </tr>
+            <tr align="left">
+                <td><input type="radio" name="atom1" value="19">K</td>
+                <td><input type="radio" name="atom1" value="20">Ca</td>
+                <td><input type="radio" name="atom1" value="21">Sc</td>
+                <td><input type="radio" name="atom1" value="22">Ti</td>
+                <td><input type="radio" name="atom1" value="23">V</td>
+                <td><input type="radio" name="atom1" value="24">Cr</td>
+                <td><input type="radio" name="atom1" value="25">Mn</td>
+                <td><input type="radio" name="atom1" value="26">Fe</td>
+                <td><input type="radio" name="atom1" value="27">Co</td>
+                <td><input type="radio" name="atom1" value="28">Ni</td>
+                <td><input type="radio" name="atom1" value="29">Cu</td>
+                <td><input type="radio" name="atom1" value="30">Zn</td>
+                <td><input type="radio" name="atom1" value="31">Ga</td>
+                <td><input type="radio" name="atom1" value="32">Ge</td>
+                <td><input type="radio" name="atom1" value="33">As</td>
+                <td><input type="radio" name="atom1" value="34">Se</td>
+                <td><input type="radio" name="atom1" value="35">Br</td>
+                <td><input type="radio" name="atom1" value="36">Kr</td>
+            </tr>
+            <tr align="left">
+                <td><input type="radio" name="atom1" value="37">Rb</td>
+                <td><input type="radio" name="atom1" value="38">Sr</td>
+                <td><input type="radio" name="atom1" value="39">Y</td>
+                <td><input type="radio" name="atom1" value="40">Zr</td>
+                <td><input type="radio" name="atom1" value="41">Nb</td>
+                <td><input type="radio" name="atom1" value="42">Mo</td>
+                <td><input type="radio" name="atom1" value="43">Tc</td>
+                <td><input type="radio" name="atom1" value="44">Ru</td>
+                <td><input type="radio" name="atom1" value="45">Rh</td>
+                <td><input type="radio" name="atom1" value="46">Pd</td>
+                <td><input type="radio" name="atom1" value="47">Ag</td>
+                <td><input type="radio" name="atom1" value="48">Cd</td>
+                <td><input type="radio" name="atom1" value="49">In</td>
+                <td><input type="radio" name="atom1" value="50">Sn</td>
+                <td><input type="radio" name="atom1" value="51">Sb</td>
+                <td><input type="radio" name="atom1" value="52">Te</td>
+                <td><input type="radio" name="atom1" value="53">I</td>
+                <td><input type="radio" name="atom1" value="54">Xe</td>
+            </tr>
+            <tr align="left">
+                <td><input type="radio" name="atom1" value="55">Cs</td>
+                <td><input type="radio" name="atom1" value="56">Ba</td>
+                <td><input type="radio" name="atom1" value="71">Lu</td>
+                <td><input type="radio" name="atom1" value="72">Hf</td>
+                <td><input type="radio" name="atom1" value="73">Ta</td>
+                <td><input type="radio" name="atom1" value="74">W</td>
+                <td><input type="radio" name="atom1" value="75">Re</td>
+                <td><input type="radio" name="atom1" value="76">Os</td>
+                <td><input type="radio" name="atom1" value="77">Ir</td>
+                <td><input type="radio" name="atom1" value="78">Pt</td>
+                <td><input type="radio" name="atom1" value="79">Au</td>
+                <td><input type="radio" name="atom1" value="80">Hg</td>
+                <td><input type="radio" name="atom1" value="81">Tl</td>
+                <td><input type="radio" name="atom1" value="82">Pb</td>
+                <td><input type="radio" name="atom1" value="83">Bi</td>
+                <td><input type="radio" name="atom1" value="84">Po</td>
+                <td>At</td>
+                <td>Rn</td>
+            </tr>
+            <tr align="left">
+                <td>Fr</td>
+                <td>Ra</td>
+                <td>Lr</td>
+                <td>Rf</td>
+                <td>Db</td>
+                <td>Sg</td>
+                <td>Bh</td>
+                <td>Hs</td>
+                <td>Mt</td>
+                <td>Ds</td>
+                <td>Rg</td>
+                <td>Cn</td>
+                <td>Nh</td>
+                <td>Fl</td>
+                <td>Mc</td>
+                <td>Lv</td>
+                <td>Ts</td>
+                <td>Og</td>
+            </tr>
+            <tr align="left"></tr>
+            <tr align="left">
+                <td></td>
+                <td></td>
+                <td><input type="radio" name="atom1" value="57">La</td>
+                <td><input type="radio" name="atom1" value="58">Ce</td>
+                <td><input type="radio" name="atom1" value="59">Pr</td>
+                <td><input type="radio" name="atom1" value="60">Nd</td>
+                <td><input type="radio" name="atom1" value="61">Pm</td>
+                <td><input type="radio" name="atom1" value="62">Sm</td>
+                <td><input type="radio" name="atom1" value="63">Eu</td>
+                <td><input type="radio" name="atom1" value="64">Gd</td>
+                <td><input type="radio" name="atom1" value="65">Tb</td>
+                <td><input type="radio" name="atom1" value="66">Dy</td>
+                <td><input type="radio" name="atom1" value="67">Ho</td>
+                <td><input type="radio" name="atom1" value="68">Er</td>
+                <td><input type="radio" name="atom1" value="69">Tm</td>
+                <td><input type="radio" name="atom1" value="70">Yb</td>
+            </tr>
+            <tr align="left">
+                <td></td>
+                <td></td>
+                <td>Ac</td>
+                <td>Th</td>
+                <td>Pa</td>
+                <td>U</td>
+                <td>Np</td>
+                <td>Pu</td>
+                <td>Am</td>
+                <td>Cm</td>
+                <td>Bk</td>
+                <td>Cf</td>
+                <td>Es</td>
+                <td>Fm</td>
+                <td>Md</td>
+                <td>No</td>
+            </tr>
+        </table>
+    </form>
+    <form id="atom2">
+        2個目の元素:
+        <table border="1">
+            <tr align="left">
+                <td><input type="radio" name="atom2" value="1" checked="checked">H</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><input type="radio" name="atom2" value="2">He</td>
+            </tr>
+            <tr align="left">
+                <td><input type="radio" name="atom2" value="3">Li</td>
+                <td><input type="radio" name="atom2" value="4">Be</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><input type="radio" name="atom2" value="5">B</td>
+                <td><input type="radio" name="atom2" value="6">C</td>
+                <td><input type="radio" name="atom2" value="7">N</td>
+                <td><input type="radio" name="atom2" value="8">O</td>
+                <td><input type="radio" name="atom2" value="9">F</td>
+                <td><input type="radio" name="atom2" value="10">Ne</td>
+            </tr>
+            <tr align="left">
+                <td><input type="radio" name="atom2" value="11">Na</td>
+                <td><input type="radio" name="atom2" value="12">Mg</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><input type="radio" name="atom2" value="13">Al</td>
+                <td><input type="radio" name="atom2" value="14">Si</td>
+                <td><input type="radio" name="atom2" value="15">P</td>
+                <td><input type="radio" name="atom2" value="16">S</td>
+                <td><input type="radio" name="atom2" value="17">Cl</td>
+                <td><input type="radio" name="atom2" value="18">Ar</td>
+            </tr>
+            <tr align="left">
+                <td><input type="radio" name="atom2" value="19">K</td>
+                <td><input type="radio" name="atom2" value="20">Ca</td>
+                <td><input type="radio" name="atom2" value="21">Sc</td>
+                <td><input type="radio" name="atom2" value="22">Ti</td>
+                <td><input type="radio" name="atom2" value="23">V</td>
+                <td><input type="radio" name="atom2" value="24">Cr</td>
+                <td><input type="radio" name="atom2" value="25">Mn</td>
+                <td><input type="radio" name="atom2" value="26">Fe</td>
+                <td><input type="radio" name="atom2" value="27">Co</td>
+                <td><input type="radio" name="atom2" value="28">Ni</td>
+                <td><input type="radio" name="atom2" value="29">Cu</td>
+                <td><input type="radio" name="atom2" value="30">Zn</td>
+                <td><input type="radio" name="atom2" value="31">Ga</td>
+                <td><input type="radio" name="atom2" value="32">Ge</td>
+                <td><input type="radio" name="atom2" value="33">As</td>
+                <td><input type="radio" name="atom2" value="34">Se</td>
+                <td><input type="radio" name="atom2" value="35">Br</td>
+                <td><input type="radio" name="atom2" value="36">Kr</td>
+            </tr>
+            <tr align="left">
+                <td><input type="radio" name="atom2" value="37">Rb</td>
+                <td><input type="radio" name="atom2" value="38">Sr</td>
+                <td><input type="radio" name="atom2" value="39">Y</td>
+                <td><input type="radio" name="atom2" value="40">Zr</td>
+                <td><input type="radio" name="atom2" value="41">Nb</td>
+                <td><input type="radio" name="atom2" value="42">Mo</td>
+                <td><input type="radio" name="atom2" value="43">Tc</td>
+                <td><input type="radio" name="atom2" value="44">Ru</td>
+                <td><input type="radio" name="atom2" value="45">Rh</td>
+                <td><input type="radio" name="atom2" value="46">Pd</td>
+                <td><input type="radio" name="atom2" value="47">Ag</td>
+                <td><input type="radio" name="atom2" value="48">Cd</td>
+                <td><input type="radio" name="atom2" value="49">In</td>
+                <td><input type="radio" name="atom2" value="50">Sn</td>
+                <td><input type="radio" name="atom2" value="51">Sb</td>
+                <td><input type="radio" name="atom2" value="52">Te</td>
+                <td><input type="radio" name="atom2" value="53">I</td>
+                <td><input type="radio" name="atom2" value="54">Xe</td>
+            </tr>
+            <tr align="left">
+                <td><input type="radio" name="atom2" value="55">Cs</td>
+                <td><input type="radio" name="atom2" value="56">Ba</td>
+                <td><input type="radio" name="atom2" value="71">Lu</td>
+                <td><input type="radio" name="atom2" value="72">Hf</td>
+                <td><input type="radio" name="atom2" value="73">Ta</td>
+                <td><input type="radio" name="atom2" value="74">W</td>
+                <td><input type="radio" name="atom2" value="75">Re</td>
+                <td><input type="radio" name="atom2" value="76">Os</td>
+                <td><input type="radio" name="atom2" value="77">Ir</td>
+                <td><input type="radio" name="atom2" value="78">Pt</td>
+                <td><input type="radio" name="atom2" value="79">Au</td>
+                <td><input type="radio" name="atom2" value="80">Hg</td>
+                <td><input type="radio" name="atom2" value="81">Tl</td>
+                <td><input type="radio" name="atom2" value="82">Pb</td>
+                <td><input type="radio" name="atom2" value="83">Bi</td>
+                <td><input type="radio" name="atom2" value="84">Po</td>
+                <td>At</td>
+                <td>Rn</td>
+            </tr>
+            <tr align="left">
+                <td>Fr</td>
+                <td>Ra</td>
+                <td>Lr</td>
+                <td>Rf</td>
+                <td>Db</td>
+                <td>Sg</td>
+                <td>Bh</td>
+                <td>Hs</td>
+                <td>Mt</td>
+                <td>Ds</td>
+                <td>Rg</td>
+                <td>Cn</td>
+                <td>Nh</td>
+                <td>Fl</td>
+                <td>Mc</td>
+                <td>Lv</td>
+                <td>Ts</td>
+                <td>Og</td>
+            </tr>
+            <tr align="left"></tr>
+            <tr align="left">
+                <td></td>
+                <td></td>
+                <td><input type="radio" name="atom2" value="57">La</td>
+                <td><input type="radio" name="atom2" value="58">Ce</td>
+                <td><input type="radio" name="atom2" value="59">Pr</td>
+                <td><input type="radio" name="atom2" value="60">Nd</td>
+                <td><input type="radio" name="atom2" value="61">Pm</td>
+                <td><input type="radio" name="atom2" value="62">Sm</td>
+                <td><input type="radio" name="atom2" value="63">Eu</td>
+                <td><input type="radio" name="atom2" value="64">Gd</td>
+                <td><input type="radio" name="atom2" value="65">Tb</td>
+                <td><input type="radio" name="atom2" value="66">Dy</td>
+                <td><input type="radio" name="atom2" value="67">Ho</td>
+                <td><input type="radio" name="atom2" value="68">Er</td>
+                <td><input type="radio" name="atom2" value="69">Tm</td>
+                <td><input type="radio" name="atom2" value="70">Yb</td>
+            </tr>
+            <tr align="left">
+                <td></td>
+                <td></td>
+                <td>Ac</td>
+                <td>Th</td>
+                <td>Pa</td>
+                <td>U</td>
+                <td>Np</td>
+                <td>Pu</td>
+                <td>Am</td>
+                <td>Cm</td>
+                <td>Bk</td>
+                <td>Cf</td>
+                <td>Es</td>
+                <td>Fm</td>
+                <td>Md</td>
+                <td>No</td>
+            </tr>
+        </table>
+    </form>
+    <input type="button" value="結晶構造を見る" onclick="viewcrystal();">
+    <input type="submit" value="計算を始める">
+
+    <span id=mydiv></span>
+    <span id=btns></span>
+
+    <script type="text/javascript">
+        function viewcrystal() {
+            var lattice = document.getElementById('lattice').lattice.value;
+            var alat = document.getElementById('alat').value;
+            var atom1 = document.getElementById('atom1').atom1.value;
+            var atom2 = document.getElementById('atom2').atom2.value;
+
+            if (lattice == "nacl") {
+                var a1x = 0.000;
+                var a1y = parseFloat(alat);
+                var a1z = parseFloat(alat);
+                var a2x = parseFloat(alat);
+                var a2y = 0.000;
+                var a2z = parseFloat(alat);
+                var a3x = parseFloat(alat);
+                var a3y = parseFloat(alat);
+                var a3z = 0.000;
+
+                var f1 = 0.5;
+                var f2 = 0.5;
+                var f3 = 0.5;
+            }
+            else if (lattice == "cscl") {
+                var a1x = parseFloat(alat);
+                var a1y = 0.000;
+                var a1z = 0.000;
+                var a2x = 0.000;
+                var a2y = parseFloat(alat);
+                var a2z = 0.000;
+                var a3x = 0.000;
+                var a3y = 0.000;
+                var a3z = parseFloat(alat);
+
+                var f1 = 0.5;
+                var f2 = 0.5;
+                var f3 = 0.5;
+            }
+            else if (lattice == "znblende") {
+                var a1x = 0.000;
+                var a1y = parseFloat(alat);
+                var a1z = parseFloat(alat);
+                var a2x = parseFloat(alat);
+                var a2y = 0.000;
+                var a2z = parseFloat(alat);
+                var a3x = parseFloat(alat);
+                var a3y = parseFloat(alat);
+                var a3z = 0.000;
+
+                var f1 = 0.25;
+                var f2 = 0.25;
+                var f3 = 0.25;
+            }
+
+            var cx = f1 * a1x + f2 * a2x + f3 * a3x;
+            var cy = f1 * a1y + f2 * a2y + f3 * a3y;
+            var cz = f1 * a1z + f2 * a2z + f3 * a3z;
+
+            var jmolscript = 'load INLINE "'
+                + 'CRYSTAL\n'
+                + '# Primitive lattice vectors in Angstrom\n'
+                + 'PRIMVEC\n'
+                + String(a1x) + ' ' + String(a1y) + ' ' + String(a1z) + '\n'
+                + String(a2x) + ' ' + String(a2y) + ' ' + String(a2z) + '\n'
+                + String(a3x) + ' ' + String(a3y) + ' ' + String(a3z) + '\n'
+                + '# Cartesian coordinates in Angstrom.\n'
+                + 'PRIMCOORD\n'
+                + '2 1\n'
+                + atom1 + '     0.0     0.0     0.0\n'
+                + atom2 + '     ' + String(cx) + '    ' + String(cy) + '     ' + String(cz)
+                + '" {3,3,3};'
+                + 'set perspectiveDepth ON; select; set defaultLabelXYZ \"%e\";'
+                + 'set labelToggle;'
+                + 'set labelAtom;'
+                + 'set labelOffset 0 0;'
+                + 'color labels black';
+
+            Jmol.script(jmolApplet0, jmolscript);
+        }
+    </script>
+
+</body>
+</html>
