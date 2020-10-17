@@ -11,7 +11,7 @@
     fwrite($rssxml, "<?xml version='1.0' encoding='UTF-8'?>\n");
     fwrite($rssxml, "<rss version='2.0'>\n");
     fwrite($rssxml, "  <channel>\n");
-    fwrite($rssxml, "    <title>結晶とシミュレーションなんでも掲示板</title>\n");
+    fwrite($rssxml, "    <title>身の回りにある結晶を投稿してみよう</title>\n");
     fwrite($rssxml, "    <link>" . $thisurl . "</link>\n");
     fwrite($rssxml, "    <description></description>\n");
     fwrite($rssxml, "    <item>\n");
@@ -25,30 +25,7 @@
     fwrite($rssxml, "</rss>\n");
     fclose($rssxml);
 
-    if ($_POST['submittype'] === 'text') {
-      fputcsv($fp, [$_POST['name'], $_POST['comment'], $_POST['submittype'], $submittime, $submitid]);
-    }
-    elseif ($_POST['submittype'] === 'image') {
-      fputcsv($fp, [$_POST['name'], $uploadfile, $_POST['submittype'], $submittime, $submitid, $_FILES['avatar']['tmp_name']]);
-      move_uploaded_file($_FILES['avatar']['tmp_name'], $uploadfile);
-      chmod($uploadfile, 0777);
-    }
-    elseif ($_POST['submittype'] === 'file') {
-      fputcsv($fp, [$_POST['name'], $uploadfile, $_POST['submittype'], $submittime, $submitid, $_FILES['avatar']['tmp_name']]);
-      move_uploaded_file($_FILES['avatar']['tmp_name'], $uploadfile);
-      chmod($uploadfile, 0777);
-    }
-    elseif ($_POST['submittype'] === 'freehand') {
-      $canvas = $_POST['comment'];
-      $canvas = base64_decode($canvas);
-      $image = imagecreatefromstring($canvas);
-      $uploadfile = date("U") . ".png";
-      imagesavealpha($image, TRUE);
-      imagepng($image , $uploadfile);
-  
-      fputcsv($fp, [$_POST['name'], $uploadfile, $_POST['submittype'], $submittime, $submitid]);
-      chmod($uploadfile, 0777);
-    }
+    fputcsv($fp, [$_POST['name'], $uploadfile, $_POST['comment'], $submittime, $submitid]);
     rewind($fp);
   }
   
@@ -84,14 +61,51 @@ $(function() {
   makePreview();
 });
 </script>
-    <title>なんでも掲示板</title>
+<script type="text/javascript" src="../JSmol.min.js"></script>
+<script type="text/javascript"> 
+
+// supersimple2.htm - illustrating the use of jQuery(document).ready to 
+// populate all spans and divs AFTER the page is loaded.
+// This is good programming practice.
+
+$(document).ready(
+
+function() {
+
+Info = {
+	width: 600,
+	height: 600,
+	debug: false,
+	j2sPath: "../j2s",
+	color: "0xC0C0C0",
+  disableJ2SLoadMonitor: true,
+  disableInitialConsole: true,
+	addSelectionOptions: false,
+	serverURL: "https://chemapps.stolaf.edu/jmol/jsmol/php/jsmol.php",
+	use: "HTML5",
+	readyFunction: null
+}
+
+$("#mydiv").html(Jmol.getAppletHtml("jmolApplet0",Info))
+$("#btns").html(
+	Jmol.jmolButton(jmolApplet0, "write frames {*} \"crystal.jpg\"","画像を保存")
+ +Jmol.jmolButton(jmolApplet0, "stereo on","立体視オン")
+ +Jmol.jmolButton(jmolApplet0, "stereo off","立体視オフ")
+ )
+}
+
+
+);
+</script>
+    <title>身の回りにある結晶を投稿してみよう</title>
   </head>
   <body bgcolor="CCFFCC">
-    <h1>なんでも掲示板</h1>
+    <h1>身の回りにある結晶を投稿してみよう</h1>
 
     <h2>
-    <p>結晶のこと、物性のこと、コンピューターシミュレーションのことや研究室生活など、なんでも聞いてみましょう！</p>
-    <p>iPadなどのタッチパネルで絵を描くことも出来ます。</p>    
+    <p>身の回りにある結晶を投稿してみましょう！
+    下にある結晶構造を見ることができます。
+    </p>
     </h2>
 
     <h3>ホームページ製作(HTML)に詳しい人向けの情報</h3>
@@ -103,35 +117,71 @@ $(function() {
       <li><a href="./rss.xml">RSS</a></li>
     </ul>
     
-    <h2>コメント</h2>
+	<span id=mydiv></span>
+	<span id=btns></span>
+	URL: <input type="text" name="name" id="cifurl" value="">
+	<input type="button" value="URLから開く" id="canvassubmit" onclick="opencifurl()">
+	<br />
+	<a href="javascript:opencif('../cif/1502689.cif')">アルミニウム</a>
+	<a href="javascript:opencif('../cif/2101052.cif')">ルビーやサファイア</a>
+	<a href="javascript:opencif('../cif/1532664.cif')">高温超伝導体</a>
+	<a href="javascript:opencif('../cif/1010060.cif')">ドライアイス</a>
+	<a href="javascript:opencif('../cif/9008564.cif')">ダイヤモンド</a>
+	<a href="javascript:opencif('../cif/9006598.cif')">鉄</a>
+	<a href="javascript:opencif('../cif/9008868.cif')">青色発光ダイオード</a>
+	<a href="javascript:opencif('../cif/1200018.cif')">黒鉛</a>
+	<a href="javascript:opencif('../cif/1011023.cif')">氷</a>
+	<a href="javascript:opencif('../cif/4505482.cif')">リチウムイオン電池正極</a>
+	<a href="javascript:opencif('../cif/1521011.cif')">下部マントル</a>
+	<a href="javascript:opencif('../cif/1000041.cif')">しお(岩塩)</a>
+	<a href="javascript:opencif('../cif/1008718.cif')">ネオジム磁石</a>
+	<a href="javascript:opencif('../cif/9012600.cif')">水晶</a>
+	<a href="javascript:opencif('../cif/3500015.cif')">砂糖(スクロース)</a>
+	<a href="javascript:opencif('../cif/9011048.cif')">重曹</a>
+	<a href="javascript:opencif('../cif/2100992.cif')">チョーク(炭酸カルシウム)</a>
+	<a href="javascript:opencif('../cif/9008463.cif')">金</a>
+	<a href="javascript:opencif('../cif/9008459.cif')">銀</a>
+	<a href="javascript:opencif('../cif/9008468.cif')">銅</a>
+
+<script type="text/javascript">
+function opencif(source) {
+			var jmolscript = 'load '
+				+ source
+				+ ' {3,3,3};'
+				+ 'set perspectiveDepth ON; select; set defaultLabelXYZ \"%e\";'
+				+ 'set labelToggle;'
+				+ 'set labelAtom;'
+				+ 'set labelOffset 0 0;'
+				+ 'color labels black';
+
+			Jmol.script(jmolApplet0, jmolscript);
+}
+
+		function opencifurl(){
+        var name = document.getElementById('cifurl').value;
+		opencif(name);
+        }
+	</script>
+
+    <h2>投稿した物質の写真や絵</h2>
 
     <?php if (!empty($rows)): ?>
       <ul>
         <?php foreach ($rows as $row): ?>
-          <?php if ($row[2] == 'text'): ?>
-            <li><?=$row[1]?> (<?=$row[2]?> by <?=$row[0]?> at <?=$row[3]?>)</li>
-          <?php elseif ($row[2] == 'freehand'): ?>
-            <li><img src="<?=$row[1]?>" height="400" align="middle"> (<?=$row[2]?> by <?=$row[0]?> at <?=$row[3]?>)</li>
-          <?php elseif ($row[2] == 'image'): ?>
-            <li><img src="<?=$row[1]?>" height="400" align="middle"> (<?=$row[2]?> by <?=$row[0]?> at <?=$row[3]?>)</li>
-          <?php elseif ($row[2] == 'file'): ?>
-            <li><a href="<?=$row[1]?>"><?=$row[1]?></a> (<?=$row[2]?> by <?=$row[0]?> at <?=$row[3]?>)</li>
-          <?php endif; ?>
+          <li>
+            <img src="<?=$row[1]?>" height="400" align="middle"> 
+            <?=$row[2]?>
+            (by <?=$row[0]?> at <?=$row[3]?>)
+          </li>
         <?php endforeach; ?>
       </ul>
     <?php else: ?>
-      <p>コメントはまだありません。</p>
+      <p>投稿はまだありません。</p>
     <?php endif; ?>
 
-    <h2>コメントする</h2>
+    <h2>投稿する</h2>
 
     <input type="button" value="投稿する" id="canvassubmit">
-    <form id="submittype">
-      <input type="radio" name="subtype" value="text" checked="checked">文章
-      <input type="radio" name="subtype" value="image">画像貼り付け
-      <input type="radio" name="subtype" value="file">ファイル貼り付け
-      <input type="radio" name="subtype" value="freehand">フリーハンド
-    </form>
     <form enctype="multipart/form-data" id="submitting" action="" method="post">
       名前(ニックネームなど): <input type="text" name="name" id="submitname" value="">
       </br>
@@ -143,25 +193,9 @@ $(function() {
       </br>
       <div id="preview"></div>
       </br>
-      ファイル: <input type="file" id="file" name="filename">
+      物質の写真や絵: <input type="file" id="file" name="filename">
       <br>
     </form>
-    フリーハンドお絵描き(タッチパネルなど):
-    <input type="button" value="キャンバスのクリア" onclick="clearCanvas();">
-    <br>
-    キャンバスの幅: <input type="text" id="width" value="600">
-    高さ: <input type="text" id="height" value="600">
-    <input type="button" value="キャンバスサイズ変更" onclick="resizeCanvas();">
-    <br>
-    <form id="linecolor">
-      <input type="radio" name="color" value="black" checked="checked">黒
-      <input type="radio" name="color" value="white">白
-      <input type="radio" name="color" value="red">赤
-      <input type="radio" name="color" value="green">緑
-      <input type="radio" name="color" value="blue">青
-    </form>
-    <canvas id="canvas" width="600" height="600" style="border:solid black 1px;"></canvas>
-    <pre id="log" style="border: 1px solid #ccc;"></pre>
 <script type="text/javascript">
 function startup() {
     var el = document.getElementById("canvas");
@@ -174,97 +208,6 @@ function startup() {
 document.addEventListener("DOMContentLoaded", startup);
 var ongoingTouches = [];
 
-function handleStart(evt) {
-    evt.preventDefault();
-    var el = document.getElementById("canvas");
-    var ctx = el.getContext("2d");
-    var touches = evt.changedTouches;
-    
-    for (var i = 0; i < touches.length; i++) {
-        ongoingTouches.push(copyTouch(touches[i]));
-    }
-}
-
-function handleMove(evt) {
-    evt.preventDefault();
-    var el = document.getElementById("canvas");
-    var ctx = el.getContext("2d");
-    var rect = el.getBoundingClientRect()
-    var touches = evt.changedTouches;
-    var linecolor = document.getElementById('linecolor').color.value;
-    
-    for (var i = 0; i < touches.length; i++) {
-        var idx = ongoingTouchIndexById(touches[i].identifier);
-
-        if (idx == 0) {
-            ctx.beginPath();
-            ctx.moveTo(ongoingTouches[idx].clientX -  rect.left, ongoingTouches[idx].clientY - rect.top);
-            ctx.lineTo(touches[i].clientX - rect.left, touches[i].clientY - rect.top);
-            ctx.lineWidth = 4;
-            ctx.strokeStyle = linecolor;
-            ctx.stroke();
-
-            ongoingTouches.splice(idx, 1, copyTouch(touches[i]));  // swap in the new touch record
-        }
-    }
-}
-function handleEnd(evt) {
-    evt.preventDefault();
-    var el = document.getElementById("canvas");
-    var ctx = el.getContext("2d");
-    var touches = evt.changedTouches;
-
-    //log("touchend");
-    for (var i = 0; i < touches.length; i++) {
-        var idx = ongoingTouchIndexById(touches[i].identifier);
-
-        if (idx >= 0) {
-            ongoingTouches.splice(idx, 1);  // remove it; we're done
-        }
-    }
-}
-function handleCancel(evt) {
-    evt.preventDefault();
-    var touches = evt.changedTouches;
-    
-    for (var i = 0; i < touches.length; i++) {
-        var idx = ongoingTouchIndexById(touches[i].identifier);
-        ongoingTouches.splice(idx, 1);  // remove it; we're done
-    }
-}
-function copyTouch({ identifier, clientX, clientY }) {
-    return { identifier, clientX, clientY };
-}
-
-function ongoingTouchIndexById(idToFind) {
-    for (var i = 0; i < ongoingTouches.length; i++) {
-        var id = ongoingTouches[i].identifier;
-        
-        if (id == idToFind) {
-            return i;
-        }
-    }
-    return -1;    // not found
-}
-function clearCanvas() {
-    var el = document.getElementById("canvas");
-    var ctx = el.getContext("2d");
-
-    ctx.clearRect(0, 0, el.width, el.height);
-}
-function resizeCanvas() {
-    var el = document.getElementById("canvas");
-    var width = document.getElementById('width').value;
-    var height = document.getElementById('height').value;
-
-    el.setAttribute("width", width);
-    el.setAttribute("height", height);
-}
-function log(msg) {
-  var p = document.getElementById('log');
-  p.innerHTML = msg + "\n" + p.innerHTML;
-}
-
 window.onload = function() {
   document.getElementById('canvassubmit').onclick = function() {
     post();
@@ -274,28 +217,12 @@ window.onload = function() {
 function post() {
     var fd = new FormData();
     
-    var submittype = document.getElementById('submittype').subtype.value;
-    fd.append('submittype',submittype);
-
     var name = document.getElementById('submitname').value;
     fd.append('name',name);
-
-    if(submittype == "text"){
-        var comment = document.getElementById('comment').value;
-        fd.append('comment', comment);
-    }
-    else if(submittype == "image"){
-        const file = document.getElementById("file").files[0];
-        fd.append('avatar', file);
-    }
-    else if(submittype == "file"){
-        const file = document.getElementById("file").files[0];
-        fd.append('avatar', file);
-    }
-    else if(submittype == "freehand"){
-        img_url = canvas.toDataURL("image/png").replace(new RegExp("data:image/png;base64,"),"");
-        fd.append('comment',img_url);
-    }
+    const file = document.getElementById("file").files[0];
+    fd.append('avatar', file);
+    var comment = document.getElementById('comment').value;
+    fd.append('comment', comment);
     
     const param = {
         method: "POST",
@@ -308,7 +235,5 @@ function post() {
     });
 }
 </script>
-    </hr>
-    This BBS operates with <a href="https://ja.osdn.net/projects/sciencebbs/">ScienceBBS</a>.
   </body>
 </html>

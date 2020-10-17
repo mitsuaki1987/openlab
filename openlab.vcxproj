@@ -57,7 +57,6 @@
     <None Include="http\simulator\index.html" />
     <None Include="http\simulator\simulate.php" />
     <None Include="http\submit\index.php" />
-    <None Include="http\view.html" />
     <None Include="http\fermi\index.html" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
