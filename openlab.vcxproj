@@ -51,8 +51,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="http\bbs\index.php" />
+    <None Include="http\hajimeni\index.html" />
+    <None Include="http\hajimeni\view.php" />
     <None Include="http\index.html" />
-    <None Include="http\setsumei.html" />
+    <None Include="http\simulator\index.html" />
+    <None Include="http\simulator\simulate.php" />
+    <None Include="http\submit\index.php" />
     <None Include="http\view.html" />
     <None Include="http\fermi\index.html" />
   </ItemGroup>

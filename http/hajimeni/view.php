@@ -26,7 +26,7 @@ Info = {
 	serverURL: "https://chemapps.stolaf.edu/jmol/jsmol/php/jsmol.php",
 	use: "HTML5",
 	readyFunction: null,
-    script: "load http://www.crystallography.net/cod/1502689.cif {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \"%e\"; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black"
+    script: "load <?=$_GET['ciffile']?> {3,3,3}; set perspectiveDepth ON; select;set defaultLabelXYZ \"%e\"; set labelToggle; set labelAtom; set labelOffset 0 0; color labels black"
 }
 
 $("#mydiv").html(Jmol.getAppletHtml("jmolApplet0",Info))
@@ -44,7 +44,7 @@ $("#btns").html(
 
 </script>
 </head>
-<body>
+<body bgcolor="CCFFCC">
 <span id=mydiv></span>
 <span id=btns></span>
 </body>

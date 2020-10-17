@@ -22,10 +22,10 @@
     $scfname = $submitid . ".in";
     $pwcommand = "./pw.x -in " . $scfname;
     $fermicommand = "./fermi_velocity.x -in " . $scfname;
-    $lattice = $_POST['lattice'];
-    $alat = $_POST['alat'];
-    $atom1 = $_POST['atom1'];
-    $atom2 = $_POST['atom2'];
+    $lattice = $_GET['lattice'];
+    $alat = $_GET['alat'];
+    $atom1 = $_GET['atom1'];
+    $atom2 = $_GET['atom2'];
     $atom = array(
         "1" => "H",
         "2" => "He",
@@ -158,17 +158,28 @@
     fclose($scfin);
 
     echo "<pre>";
-    //system($pwcommand);
-    echo "</pre>";
-    echo "<hr>";
-    echo "<pre>";
-    //system($fermicommand);
     system("cat " . $scfname);
     echo "</pre>";
     echo "<hr>";
+    echo "<pre>";
+    system($pwcommand);
+    echo "</pre>";
+    echo "<hr>";
+    echo "<pre>";
+    system($fermicommand);
+    echo "</pre>";
+    echo "<hr>";
     echo "<h2>計算完了</h2>";
-    echo '<h3><a href="' .  $submitid . '.frmsf" download="' .  $submitid . '.frmsf">フェルミ面のダウンロード</a></h3>';
+    echo '<p><h3><a href="' .  $submitid . '.frmsf" download="' .  $submitid . '.frmsf">フェルミ面のダウンロード</a></h3></p>';
 ?>
-
+    <h3>
+      私たちはこのように、
+      <ul>
+        <li>コンピューターの中に物質を再現し</li>
+        <li>シュレーディンガー方程式を解いて</li>
+        <li>その中の電子や原子の動きをシミュレーション</li>
+      </ul>
+      しています。
+    </h3>
   </body>
 </html>
