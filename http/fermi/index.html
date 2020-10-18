@@ -1,4 +1,4 @@
-<html>
+﻿<html>
   <head>
     <meta http-equiv="Content-Type"
           content="text/html; charset=utf-8">
@@ -10,37 +10,116 @@
     </script>
     <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
 
-    <title>フェルミ面図鑑</title>
+    <title>シミュレーションと可視化</title>
 
   </head>
   <body bgcolor="CCFFCC">
 
-      <h1>フェルミ面図鑑</h1>
+      <h1>物質のシミュレーションとは</h1>
 
+      <h2>物質の性質(物性)と電子の動き</h2>
+
+      <h4>
+          アルミニウムが電気を通す、鉄は磁石にくっつく、砂糖は甘い・・・、などの個々の物質の性質はどのようにして決まるのでしょうか？
+          <br />
+          ここで、物質の中で規則的に並んでいる原子核と、もう一つの構成要素「電子」が関係してきます。
+          <p><img src="../hajimeni/apple.png" height="200" align="middle"></p>
+          電子はある物質の中である原子からある原子へ、と飛び回ったり、同じ原子の周りにとどまったりしています。
+          この電子の動きが物質の性質の大半を決めているのです！
+          <br />
+          電子は放り投げられたボールが放物線を描いて飛ぶように、物理の法則にしたがって動きます。
+          <p><img src="ball.png" height="200" align="middle"></p>
+          物理法則は多くの場合「方程式」の形で表されます。
+          この場合は、
+          \[
+          \vec{x}(t+\Delta) = \vec{x}(t) +  \vec{v}(t) \Delta
+          \\
+          \vec{v}(t+\Delta) = \vec{v}(t) + \frac{\vec{F} \Delta}{m}
+          \]
+          という連立方程式になります。これは<b>ニュートン方程式</b>と呼ばれます。
+          $\vec{x}$は位置のベクトル、$\vec{v}$は速度のベクトルで、ともに時刻$t$の関数です。
+          また, $m$はボールの質量で$\vec{F}$は重力や空気抵抗などのボールにかかる力です。
+          このニュートン方程式の右辺は現在(時刻$t$)の位置や速度の式になっており、
+          ここから左辺にある近い将来(時刻$t+\Delta$)の位置や速度を計算できます。
+          これを人間の代わりにコンピューターが繰り返し計算して時間を進めて、将来のボールの軌道を予測するわけです。
+          <br />
+          物質中の電子の運動を表す物理法則は、ボールの時とは少し異なります。
+          ボールの時のような、ある時刻での位置や速度の代わりに「波動関数$\vec{\psi}$」を計算する方程式
+          \[
+          {\hat H} \vec{\psi} = E \vec{\psi}
+          \]
+          が電子の物理法則を表します。この方程式は<b>シュレーディンガー方程式</b>と呼ばれます。
+          $E$は電子のエネルギーを表します。
+          ${\hat H}$に関する説明は非常に複雑なので省略しますが、ここには「どの原子がどのような形で配置されて結晶になっているか」という条件が入っています。
+          つまり「アルミニウムの${\hat H}$」や「砂糖の${\hat H}$」のように物質によってことなる${\hat H}$が使われるわけです。
+          <br />
+          私たち物性理論の研究者(の一部)が物質のシミュレーションを行うときには、
+          <ul>
+              <li>コンピューターの中に物質の構造を再現し</li>
+              <li>その構造に応じた${\hat H}$を作り</li>
+              <li>シュレーディンガー方程式を解いて</li>
+              <li>その中の電子や原子の動きをシミュレーションする</li>
+          </ul>
+          というようなことをしています。
+      </h4>
+
+      <h2>フェルミ面</h2>
+
+      <h4>
+          シュレーディンガー方程式を解いて波動関数$\vec{\psi}$を求めたら、
+          そこから「電気を流す」、「磁石につく」などの性質を予測する研究をしています。
+          これにはいろいろなグラフを描いてみたりしてそれをにらんであーでもない、こーでもないと議論したりするのですが、
+          そのようなグラフの一つが「フェルミ面」です。
+          <br />
+          計算した物質が金属ならば、以下のようなフェルミ面のグラフが描けます。これはアルミニウムのフェルミ面です。
+          <p><img src="png/Al1-150692.png" height="300" align="middle"></p>
+          チタンでは次のようになります。
+          <p><img src="png/Ti2-168830.png" height="300" align="middle"></p>
+          これを見てすぐに物性がどうだと言えるわけではないのですが、何らかのインスピレーションを得たりします。
+          形が面白いので見て楽しむこともできます。
+      </h4>
+
+      <h2>フェルミ面図鑑</h2>
+
+      <h4>
+          実際にいろいろな物質のフェルミ面を見て楽しみたい場合にはこちらのフェルミ面図鑑を使うのが良いでしょう。
+          この下にある図鑑のファイルは、以下の「FermiSurfer」というアプリを使って見ることができます。
+          <ul>
+              <li><a href="fermisurfer.exe" dounload="fermisurfer.exe">Windows用アプリ</a></li>
+              <li><a href="FermiSurfer.apk" dounload="FermiSurfer.apk">Android用アプリ</a></li>
+          </ul>
+          使い方はこちらのYouTube動画をご覧ください。ダウンロードの部分は飛ばしてOKです。
+          <ul>
+              <li><a href="https://youtu.be/ESXOGGWT7SU" target="_blank">Windows用アプリのYouTube動画</a></li>
+              <li><a href="https://youtu.be/10Kr34lXTnU" dounload="_blank">Android用アプリのYouTube動画</a></li>
+          </ul>
+          以下、画像が大量にあるので、スマホ回線を使っている場合にはネットワーク通信量にご注意ください。
+          画像をクリックしてダウンロードしたファイルを上記FermiSurferアプリで開いて、マウスやタッチパネルでグリグリ動かしたりできます。
+      </h4>
       <h2>
-        <p><a href="x00.html">Ag - Al<sub>2</sub>Fe<sub>2</sub>Nd<sub>6</sub>S1<sub>4</sub></p>
-        <p><a href="x01.html">Al<sub>2</sub>Fe<sub>2</sub>Pr<sub>6</sub>S14 - As<sub>2</sub>Fe<sub>2</sub>Rb</p>
-        <p><a href="x02.html">As<sub>2</sub>Fe<sub>2</sub>Sr - Au<sub>7</sub>Rb<sub>3</sub></p>
-        <p><a href="x03.html">Au<sub>7</sub>Rb<sub>4</sub>Sn<sub>2</sub> - B<sub>6</sub>Cr<sub>2</sub>Sm</p>
-        <p><a href="x04.html">B<sub>6</sub>Cr<sub>3</sub>Ir<sub>6</sub>Ti<sub>3</sub> - Ba<sub>4</sub>S<sub>16</sub>Tm<sub>8</sub></p>
-        <p><a href="x05.html">Ba<sub>4</sub>S<sub>16</sub>Yb<sub>8</sub> - CEr<sub>2</sub>Fe<sub>2</sub>Si<sub>2</sub></p>
-        <p><a href="x06.html">CEr<sub>2</sub>N<sub>2</sub>O<sub>2</sub> - Ca<sub>2</sub>Ge<sub>4</sub>Ni<sub>2</sub>O<sub>12</sub></p>
-        <p><a href="x07.html">Ca<sub>2</sub>Ge<sub>4</sub>Pt<sub>4</sub> - Ce<sub>3</sub>Mn<sub>4</sub>Sn<sub>4</sub></p>
-        <p><a href="x08.html">Ce<sub>3</sub>Ni<sub>2</sub>Si<sub>8</sub> - CoV</p>
-        <p><a href="x09.html">CoW - Cr<sub>2</sub>Ge<sub>2</sub>Te<sub>6</sub></p>
-        <p><a href="x10.html">Cr<sub>2</sub>Ge<sub>4</sub>Li<sub>2</sub>O<sub>2</sub> - Cu<sub>2</sub>Hf<sub>10</sub>Pb<sub>6</sub></p>
-        <p><a href="x11.html">Cu<sub>2</sub>Hf<sub>10</sub>Sb<sub>6</sub> - Dy<sub>8</sub>S<sub>16</sub>Sr<sub>4</sub></p>
-        <p><a href="x12.html">Dy<sub>8</sub>S<sub>16</sub>Zn<sub>4</sub> - Fe<sub>2</sub>O<sub>16</sub></p>
-        <p><a href="x13.html">Fe<sub>2</sub>O<sub>16</sub> - GaRhTi</p>
-        <p><a href="x14.html">GaRhZr<sub>2</sub> - Ge<sub>3</sub>NiSr</p>
-        <p><a href="x15.html">Ge<sub>3</sub>Os<sub>3</sub>Sc<sub>3</sub> - Hg<sub>6</sub>Ho<sub>2</sub></p>
-        <p><a href="x16.html">Hg<sub>6</sub>La<sub>2</sub> - KNdTe<sub>2</sub></p>
-        <p><a href="x17.html">KNiO<sub>9</sub>P<sub>3</sub> - Mg<sub>2</sub>S<sub>8</sub>Yb<sub>4</sub></p>
-        <p><a href="x18.html">Mg<sub>2</sub>Sb<sub>2</sub>Yb - NaNdSe<sub>2</sub></p>
-        <p><a href="x19.html">NaNiO<sub>2</sub> - O<sub>2</sub>Rh<sub>4</sub>Tb<sub>4</sub></p>
-        <p><a href="x20.html">O<sub>2</sub>Rh<sub>8</sub> - Pt<sub>3</sub>V</p>
-        <p><a href="x21.html">Pt<sub>3</sub>V - W</p>
-        <p><a href="x22.html">W<sub>10</sub>Zr<sub>6</sub> - Zr<sub>3</sub></p>
-      </h2>      
+          <p><a href="x00.html">Ag - Al<sub>2</sub>Fe<sub>2</sub>Nd<sub>6</sub>S1<sub>4</sub></p>
+          <p><a href="x01.html">Al<sub>2</sub>Fe<sub>2</sub>Pr<sub>6</sub>S14 - As<sub>2</sub>Fe<sub>2</sub>Rb</p>
+          <p><a href="x02.html">As<sub>2</sub>Fe<sub>2</sub>Sr - Au<sub>7</sub>Rb<sub>3</sub></p>
+          <p><a href="x03.html">Au<sub>7</sub>Rb<sub>4</sub>Sn<sub>2</sub> - B<sub>6</sub>Cr<sub>2</sub>Sm</p>
+          <p><a href="x04.html">B<sub>6</sub>Cr<sub>3</sub>Ir<sub>6</sub>Ti<sub>3</sub> - Ba<sub>4</sub>S<sub>16</sub>Tm<sub>8</sub></p>
+          <p><a href="x05.html">Ba<sub>4</sub>S<sub>16</sub>Yb<sub>8</sub> - CEr<sub>2</sub>Fe<sub>2</sub>Si<sub>2</sub></p>
+          <p><a href="x06.html">CEr<sub>2</sub>N<sub>2</sub>O<sub>2</sub> - Ca<sub>2</sub>Ge<sub>4</sub>Ni<sub>2</sub>O<sub>12</sub></p>
+          <p><a href="x07.html">Ca<sub>2</sub>Ge<sub>4</sub>Pt<sub>4</sub> - Ce<sub>3</sub>Mn<sub>4</sub>Sn<sub>4</sub></p>
+          <p><a href="x08.html">Ce<sub>3</sub>Ni<sub>2</sub>Si<sub>8</sub> - CoV</p>
+          <p><a href="x09.html">CoW - Cr<sub>2</sub>Ge<sub>2</sub>Te<sub>6</sub></p>
+          <p><a href="x10.html">Cr<sub>2</sub>Ge<sub>4</sub>Li<sub>2</sub>O<sub>2</sub> - Cu<sub>2</sub>Hf<sub>10</sub>Pb<sub>6</sub></p>
+          <p><a href="x11.html">Cu<sub>2</sub>Hf<sub>10</sub>Sb<sub>6</sub> - Dy<sub>8</sub>S<sub>16</sub>Sr<sub>4</sub></p>
+          <p><a href="x12.html">Dy<sub>8</sub>S<sub>16</sub>Zn<sub>4</sub> - Fe<sub>2</sub>O<sub>16</sub></p>
+          <p><a href="x13.html">Fe<sub>2</sub>O<sub>16</sub> - GaRhTi</p>
+          <p><a href="x14.html">GaRhZr<sub>2</sub> - Ge<sub>3</sub>NiSr</p>
+          <p><a href="x15.html">Ge<sub>3</sub>Os<sub>3</sub>Sc<sub>3</sub> - Hg<sub>6</sub>Ho<sub>2</sub></p>
+          <p><a href="x16.html">Hg<sub>6</sub>La<sub>2</sub> - KNdTe<sub>2</sub></p>
+          <p><a href="x17.html">KNiO<sub>9</sub>P<sub>3</sub> - Mg<sub>2</sub>S<sub>8</sub>Yb<sub>4</sub></p>
+          <p><a href="x18.html">Mg<sub>2</sub>Sb<sub>2</sub>Yb - NaNdSe<sub>2</sub></p>
+          <p><a href="x19.html">NaNiO<sub>2</sub> - O<sub>2</sub>Rh<sub>4</sub>Tb<sub>4</sub></p>
+          <p><a href="x20.html">O<sub>2</sub>Rh<sub>8</sub> - Pt<sub>3</sub>V</p>
+          <p><a href="x21.html">Pt<sub>3</sub>V - W</p>
+          <p><a href="x22.html">W<sub>10</sub>Zr<sub>6</sub> - Zr<sub>3</sub></p>
+      </h2>
   </body>
 </html>
