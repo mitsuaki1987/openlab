@@ -1,11 +1,12 @@
 <?php
   $fp = fopen('data.csv', 'a+b');
-  $submittime = date("c");
-  $submitid = date("U");
-  $uploadfile = $submitid . "_" . $_FILES['avatar']['name'];
-  $thisurl = (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $submittime = date("c");
+    $submitid = date("U");
+    $uploadfile = $submitid . "_" . $_FILES['avatar']['name'];
+    $thisurl = (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
 
     $rssxml = fopen('rss.xml', 'w');
     fwrite($rssxml, "<?xml version='1.0' encoding='UTF-8'?>\n");
@@ -26,6 +27,8 @@
     fclose($rssxml);
 
     fputcsv($fp, [$_POST['name'], $uploadfile, $_POST['comment'], $submittime, $submitid]);
+    move_uploaded_file($_FILES['avatar']['tmp_name'], $uploadfile);
+    chmod($uploadfile, 0777);
     rewind($fp);
   }
   
@@ -120,7 +123,7 @@ $("#btns").html(
 	<span id=mydiv></span>
 	<span id=btns></span>
 	URL: <input type="text" name="name" id="cifurl" value="">
-	<input type="button" value="URLから開く" id="canvassubmit" onclick="opencifurl()">
+	<input type="button" value="URLから開く" id="openurl" onclick="opencifurl()">
 	<br />
 	<a href="javascript:opencif('../cif/1502689.cif')">アルミニウム</a>
 	<a href="javascript:opencif('../cif/2101052.cif')">ルビーやサファイア</a>
@@ -181,10 +184,11 @@ function opencif(source) {
 
     <h2>投稿する</h2>
 
-    <input type="button" value="投稿する" id="canvassubmit">
     <form enctype="multipart/form-data" id="submitting" action="" method="post">
       名前(ニックネームなど): <input type="text" name="name" id="submitname" value="">
       </br>
+      物質の写真や絵: <input type="file" id="file" name="filename">
+      <br>
       コメント:
       </br>
       <textarea name="comment" id="comment" cols="40" rows="5" maxlength="1000" wrap="hard"></textarea>
@@ -193,21 +197,9 @@ function opencif(source) {
       </br>
       <div id="preview"></div>
       </br>
-      物質の写真や絵: <input type="file" id="file" name="filename">
-      <br>
+      <input type="button" value="投稿する" id="canvassubmit">
     </form>
 <script type="text/javascript">
-function startup() {
-    var el = document.getElementById("canvas");
-    el.addEventListener("touchstart", handleStart, false);
-    el.addEventListener("touchend", handleEnd, false);
-    el.addEventListener("touchcancel", handleCancel, false);
-    el.addEventListener("touchmove", handleMove, false);
-}
-
-document.addEventListener("DOMContentLoaded", startup);
-var ongoingTouches = [];
-
 window.onload = function() {
   document.getElementById('canvassubmit').onclick = function() {
     post();

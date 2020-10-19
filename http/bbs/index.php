@@ -1,11 +1,12 @@
 <?php
   $fp = fopen('data.csv', 'a+b');
-  $submittime = date("c");
-  $submitid = date("U");
-  $uploadfile = $submitid . "_" . $_FILES['avatar']['name'];
-  $thisurl = (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $submittime = date("c");
+    $submitid = date("U");
+    $uploadfile = $submitid . "_" . $_FILES['avatar']['name'];
+    $thisurl = (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
 
     $rssxml = fopen('rss.xml', 'w');
     fwrite($rssxml, "<?xml version='1.0' encoding='UTF-8'?>\n");
