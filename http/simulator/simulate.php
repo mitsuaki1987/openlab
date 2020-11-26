@@ -22,6 +22,7 @@
     $scfname = $submitid . ".in";
     $pwcommand = "./pw.x -in " . $scfname;
     $fermicommand = "./fermi_velocity.x -in " . $scfname;
+    $jscommand = "./frmsf2js.sh " . $submitid . ".frmsf";
     $lattice = $_GET['lattice'];
     $alat = $_GET['alat'];
     $atom1 = $_GET['atom1'];
@@ -167,10 +168,11 @@
     echo "<hr>";
     echo "<pre>";
     system($fermicommand);
+    system($jscommand);
     echo "</pre>";
     echo "<hr>";
     echo "<h2>計算完了</h2>";
-    echo '<p><h3><a href="' .  $submitid . '.frmsf" download="' .  $submitid . '.frmsf">フェルミ面のダウンロード</a></h3></p>';
+    echo '<p><h3><a href="https://fermisurfer.osdn.jp/js/index.php?frmsf=https://macloud.issp.u-tokyo.ac.jp/simulator/' .  $submitid . '.js" target="_blank">フェルミ面の表示</a></h3></p>';
 ?>
     <h3>
       私たちはこのように、
