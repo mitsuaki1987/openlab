@@ -10,7 +10,7 @@
     </script>
     <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
 
-    <title>物性研の計算機でシミュレーションする</title>
+    <title>リモートの計算機でシミュレーションする</title>
 
   </head>
   <body bgcolor="CCFFCC">
@@ -169,10 +169,11 @@
     echo "<pre>";
     system($fermicommand);
     system($jscommand);
+    system("rm -r -f -v " . $submitid . ".save/ " . $submitid . ".xml " . $submitid . ".frmsf");
     echo "</pre>";
     echo "<hr>";
     echo "<h2>計算完了</h2>";
-    echo '<p><h3><a href="https://fermisurfer.osdn.jp/js/index.php?frmsf=https://macloud.issp.u-tokyo.ac.jp/simulator/' .  $submitid . '.js" target="_blank">フェルミ面の表示</a></h3></p>';
+    echo '<p><h3><a href="https://fermisurfer.osdn.jp/js/index.php?frmsf=https://openlab.osdn.jp/simulator/' .  $submitid . '.js" target="_blank">フェルミ面の表示</a></h3></p>';
 ?>
     <h3>
       私たちはこのように、
