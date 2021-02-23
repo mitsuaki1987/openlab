@@ -8,28 +8,30 @@
     $uploadfile = $submitid . "_" . $_FILES['avatar']['name'];
     $thisurl = (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
 
-    $rssxml = fopen('rss.xml', 'w');
-    fwrite($rssxml, "<?xml version='1.0' encoding='UTF-8'?>\n");
-    fwrite($rssxml, "<rss version='2.0'>\n");
-    fwrite($rssxml, "  <channel>\n");
-    fwrite($rssxml, "    <title>身の回りにある結晶を投稿してみよう</title>\n");
-    fwrite($rssxml, "    <link>" . $thisurl . "</link>\n");
-    fwrite($rssxml, "    <description></description>\n");
-    fwrite($rssxml, "    <item>\n");
-    fwrite($rssxml, "      <title>" . $_POST['name'] . " がコメントしました。</title>\n");
-    fwrite($rssxml, "      <link>" . $thisurl . "</link>\n");
-    fwrite($rssxml, "      <guid>" . $thisurl . "#". $submitid . "</guid>\n");
-    fwrite($rssxml, "      <description></description>\n");
-    fwrite($rssxml, "      <pubDate>" . $submittime . "</pubDate>\n");
-    fwrite($rssxml, "    </item>\n");
-    fwrite($rssxml, "  </channel>\n");
-    fwrite($rssxml, "</rss>\n");
-    fclose($rssxml);
+    if($_FILES['avatar']['name'] != '') {
+      $rssxml = fopen('rss.xml', 'w');
+      fwrite($rssxml, "<?xml version='1.0' encoding='UTF-8'?>\n");
+      fwrite($rssxml, "<rss version='2.0'>\n");
+      fwrite($rssxml, "  <channel>\n");
+      fwrite($rssxml, "    <title>身の回りにある結晶を投稿してみよう</title>\n");
+      fwrite($rssxml, "    <link>" . $thisurl . "</link>\n");
+      fwrite($rssxml, "    <description></description>\n");
+      fwrite($rssxml, "    <item>\n");
+      fwrite($rssxml, "      <title>" . $_POST['name'] . " がコメントしました。</title>\n");
+      fwrite($rssxml, "      <link>" . $thisurl . "</link>\n");
+      fwrite($rssxml, "      <guid>" . $thisurl . "#". $submitid . "</guid>\n");
+      fwrite($rssxml, "      <description></description>\n");
+      fwrite($rssxml, "      <pubDate>" . $submittime . "</pubDate>\n");
+      fwrite($rssxml, "    </item>\n");
+      fwrite($rssxml, "  </channel>\n");
+      fwrite($rssxml, "</rss>\n");
+      fclose($rssxml);
 
-    fputcsv($fp, [$_POST['name'], $uploadfile, $_POST['comment'], $submittime, $submitid]);
-    move_uploaded_file($_FILES['avatar']['tmp_name'], $uploadfile);
-    chmod($uploadfile, 0777);
-    rewind($fp);
+      fputcsv($fp, [$_POST['name'], $uploadfile, $_POST['comment'], $submittime, $submitid]);
+      move_uploaded_file($_FILES['avatar']['tmp_name'], $uploadfile);
+      chmod($uploadfile, 0777);
+      rewind($fp);
+    }
   }
   
   while ($row = fgetcsv($fp)) {

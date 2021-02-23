@@ -107,7 +107,7 @@ $(function() {
     <h2>コメント</h2>
 
     <?php if (!empty($rows)): ?>
-      <ul>
+      <ol>
         <?php foreach ($rows as $row): ?>
           <?php if ($row[2] == 'text'): ?>
             <li><?=$row[1]?> (<?=$row[2]?> by <?=$row[0]?> at <?=$row[3]?>)</li>
@@ -119,7 +119,7 @@ $(function() {
             <li><a href="<?=$row[1]?>"><?=$row[1]?></a> (<?=$row[2]?> by <?=$row[0]?> at <?=$row[3]?>)</li>
           <?php endif; ?>
         <?php endforeach; ?>
-      </ul>
+      </ol>
     <?php else: ?>
       <p>コメントはまだありません。</p>
     <?php endif; ?>
