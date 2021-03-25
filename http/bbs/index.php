@@ -8,23 +8,25 @@
     $uploadfile = $submitid . "_" . $_FILES['avatar']['name'];
     $thisurl = (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
 
-    $rssxml = fopen('rss.xml', 'w');
-    fwrite($rssxml, "<?xml version='1.0' encoding='UTF-8'?>\n");
-    fwrite($rssxml, "<rss version='2.0'>\n");
-    fwrite($rssxml, "  <channel>\n");
-    fwrite($rssxml, "    <title>結晶とシミュレーションなんでも掲示板</title>\n");
-    fwrite($rssxml, "    <link>" . $thisurl . "</link>\n");
-    fwrite($rssxml, "    <description></description>\n");
-    fwrite($rssxml, "    <item>\n");
-    fwrite($rssxml, "      <title>" . $_POST['name'] . " がコメントしました。</title>\n");
-    fwrite($rssxml, "      <link>" . $thisurl . "</link>\n");
-    fwrite($rssxml, "      <guid>" . $thisurl . "#". $submitid . "</guid>\n");
-    fwrite($rssxml, "      <description></description>\n");
-    fwrite($rssxml, "      <pubDate>" . $submittime . "</pubDate>\n");
-    fwrite($rssxml, "    </item>\n");
-    fwrite($rssxml, "  </channel>\n");
-    fwrite($rssxml, "</rss>\n");
-    fclose($rssxml);
+    if ($submittype === 'text' or $submittype === 'file' or $submittype === 'image' or $submittype === 'freehand'){
+      $rssxml = fopen('rss.xml', 'w');
+      fwrite($rssxml, "<?xml version='1.0' encoding='UTF-8'?>\n");
+      fwrite($rssxml, "<rss version='2.0'>\n");
+      fwrite($rssxml, "  <channel>\n");
+      fwrite($rssxml, "    <title>結晶とシミュレーションなんでも掲示板</title>\n");
+      fwrite($rssxml, "    <link>" . $thisurl . "</link>\n");
+      fwrite($rssxml, "    <description></description>\n");
+      fwrite($rssxml, "    <item>\n");
+      fwrite($rssxml, "      <title>" . $_POST['name'] . " がコメントしました。</title>\n");
+      fwrite($rssxml, "      <link>" . $thisurl . "</link>\n");
+      fwrite($rssxml, "      <guid>" . $thisurl . "#". $submitid . "</guid>\n");
+      fwrite($rssxml, "      <description></description>\n");
+      fwrite($rssxml, "      <pubDate>" . $submittime . "</pubDate>\n");
+      fwrite($rssxml, "    </item>\n");
+      fwrite($rssxml, "  </channel>\n");
+      fwrite($rssxml, "</rss>\n");
+      fclose($rssxml);
+    }
 
     if ($_POST['submittype'] === 'text') {
       fputcsv($fp, [$_POST['name'], $_POST['comment'], $_POST['submittype'], $submittime, $submitid]);
