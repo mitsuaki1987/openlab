@@ -1,8 +1,9 @@
 openlab.vcxproj.user
+openlab.vcxproj.filters
 .vs/
-http/JSmol.min.js
-http/j2s/
-http/fermi/x??.html
-http/fermi/frmsf/
-http/fermi/png/
-http/fermi/js/
+JSmol.min.js
+j2s/
+fermi/x??.html
+fermi/frmsf/
+fermi/png/
+fermi/js/

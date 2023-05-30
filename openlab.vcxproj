@@ -50,14 +50,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="http\bbs\index.php" />
-    <None Include="http\hajimeni\index.html" />
-    <None Include="http\hajimeni\view.php" />
-    <None Include="http\index.html" />
-    <None Include="http\simulator\index.html" />
-    <None Include="http\simulator\simulate.php" />
-    <None Include="http\submit\index.php" />
-    <None Include="http\fermi\index.html" />
+    <None Include="bbs\index.php" />
+    <None Include="hajimeni\index.html" />
+    <None Include="hajimeni\view.php" />
+    <None Include="index.html" />
+    <None Include="simulator\index.html" />
+    <None Include="simulator\simulate.php" />
+    <None Include="submit\index.php" />
+    <None Include="fermi\index.html" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
